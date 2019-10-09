@@ -21,8 +21,15 @@
  */
 void square_dgemm (const double  *A, const double  *B,  double  *C, const unsigned  M)
 {
-	/* TODO: implement the blocked matrix-matrix multiplication */
-        printf("implement square_dgemm routine\n");
-        exit(0);
+    for (int i = 0; i < M; i+=BLOCK_SIZE) {
+        for (int j = 0; j < M; j+=BLOCK_SIZE) {
+            for(int k=0;k<M;k+=BLOCK_SIZE){
+                for(int ii=i;ii<i+BLOCK_SIZE;ii++){
+                    for(int jj=j;jj<j+BLOCK_SIZE;jj++){
+                        C[ii*M + jj] += A[ii*M + k] * B[k*M + jj];
+                    }
+                }
+            }
+        }
+    }
 }
-
