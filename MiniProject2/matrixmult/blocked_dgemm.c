@@ -11,7 +11,7 @@
 
 /* block parameter ... */
 #ifndef BLOCK_SIZE
-#  define BLOCK_SIZE ((unsigned) 103)
+#  define BLOCK_SIZE ((unsigned) 16)
 #endif
 
 
