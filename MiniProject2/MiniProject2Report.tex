@@ -3,13 +3,12 @@
 \usepackage{assignment}
 \usepackage{textcomp}
 \usepackage{graphicx} 
-\usepackage{auto-pst-pdf}
 \usepackage{float}
 
 \begin{document}
 
 \setassignment
-\setduedate{15 October 2019, 13:30}
+\setduedate{20 October 2019, 13:30}
 
 \serieheader{High Performance Computing}{2019}{Student: Gabriel Fernandes de Oliveira}{Discussed with: N/A}{Solution for Assignment 2}{}
 \newline
@@ -35,11 +34,11 @@ In this exercise you will practice in data access optimization and performance-o
         \item  Both graphs were created and added to this assignment: 
 
         \begin{figure}[H]
-            \includegraphics[width=\linewidth]{./membench/generic_mac.pdf}
+            \includegraphics[width=\linewidth]{./results/generic_mac.pdf}
             \caption{This is the graph generated for my Macbook Pro running on macOS Sierra 10.12.6}
         \end{figure}
         \begin{figure}[H]
-            \includegraphics[width=\linewidth]{./membench/generic_icsmaster.pdf}
+            \includegraphics[width=\linewidth]{./results/generic_icsmaster.pdf}
             \caption{Graph generated on icsmaster}
         \end{figure}
            
@@ -58,13 +57,13 @@ In this exercise you will practice in data access optimization and performance-o
                     Because the stride is $1$, every element loaded in a cache line will be used, hence the good spatial locality and performance of this case.
 
                 \item $csize = 2^{20} = 4MB$ and $stride = csize/2 = 2^{19} = 2MB$
-                    This is another extreme case with a good performance, the read+write takes about 1ns for both computers, that is due to the temporal locality associated with traversing the same elements already loaded on cache.
+                    This is another extreme case with a good performance, the read+write takes about 1ns for both computers, that is due to the temporal locality associated with traversing the same elements already loaded on cache, reusing their cache copies.
                     
                     Since the stride is half the size of the array only two elements of the array are being accessed every time the array is traversed.
-                    On the first array traversal these two elements are loaded into the cache, and on all following traversals they are retrieved directly from cache, hence the good temporal locality and performance also visible in this case.
+                    On the first array traversal these two elements are loaded into the cache, and on all following traversals they are retrieved directly from cache, hence the good temporal locality and performance in this case.
             \end{itemize}
 
-        \item  The points with best temporal locality in the graph are the ones closes to the end of each line.
+        \item  The points with best temporal locality in the graph are the ones closes to the end of every line.
             For example, for the array of size $4MB$, the stride values $2MB$ and $1MB$ offer a very good temporal locality.
             This happens because with a large stride value, few elements of the array are accessed. 
             These few elements accessed can all fit into the cache, and are reused many times since the array is being traversed multiple times, hence the good temporal locality and the high performance on these conditions.
@@ -81,15 +80,17 @@ In this exercise you will practice in data access optimization and performance-o
     \begin{enumerate} % PARTE 2
 
         % 2.1
-        \item My implementation of the block matrix multiplication (figure \ref{code}) follows the one provided in pseudo-code in the motivation file as seen in figure \ref{pseudocode}:
+        \item My implementation of the block matrix multiplication (figure \ref{code}) was based on the pseudo-code provided in the motivation file (figure \ref{pseudocode}).
+            Analysing the code snippets one can notice the similarities:
+
             \begin{figure}[H]
-                \includegraphics[width=\linewidth]{pseudocode}
+                \includegraphics[width=\linewidth]{./img/pseudocode}
                 \caption{Pseudo-code provided on the motivation file}
                 \label{pseudocode}
             \end{figure}
 
             \begin{figure}[H]
-                \includegraphics[width=\linewidth]{code}
+                \includegraphics[width=\linewidth]{./img/code}
                 \caption{Function \textit{square\_dgemm} written}
                 \label{code}
             \end{figure}
@@ -98,20 +99,21 @@ In this exercise you will practice in data access optimization and performance-o
 
             The \textit{slow\_read} function copies a submatrix of $BLOCK\_SIZE$ lines and columns from a matrix located in slow memory, arrays $A, B, C$, to the local arrays created, $Ab, Bb$ and $Cb$.
 
-            In case the submatrix being copied is not interely inside the origin matrix, the copied matrix will be padded with zeroes.
+            In case the submatrix being copied is not entirely contained by the original matrix, the copied matrix will be padded with zeroes, until it reaches the size $BLOCK\_SIZE$.
+
             This is useful because it guarantees that the copied matrix has always the same dimensions: $BLOCK\_SIZE \times BLOCK\_SIZE$.
 
             \begin{figure}[H]
                 \begin{minipage}{.48\textwidth}
                     \centering
-                    \includegraphics[width=\linewidth]{load}
+                    \includegraphics[width=\linewidth]{./img/load}
                     \captionof{figure}{Load function}
                     \label{load}
                 \end{minipage}%
                 \hfill
                 \begin{minipage}{.48\textwidth}
                     \centering
-                    \includegraphics[width=\linewidth]{write}
+                    \includegraphics[width=\linewidth]{./img/write}
                     \captionof{figure}{Store function}
                     \label{write}
                 \end{minipage}
@@ -120,7 +122,7 @@ In this exercise you will practice in data access optimization and performance-o
         The naive matrix multiplication only receives references to matrices on fast memory with dimensions $BLOCK\_SIZE \times BLOCK\_SIZE$ and does the classical algorithm for matrix multiplication.
 
             \begin{figure}[H]
-                \includegraphics[width=\linewidth]{naive}
+                \includegraphics[width=\linewidth]{./img/naive}
                 \label{naive}
                 \caption{Naive matrix multiplication}
             \end{figure}
@@ -139,13 +141,15 @@ In this exercise you will practice in data access optimization and performance-o
             Follows the graph plotted on my computer (Macbook Pro running macOS Sierra 10.12.6 with 2.5GHz Intel Core i7):
 
             \begin{figure}[H]
-                \includegraphics[width=.8\linewidth]{timing_mac}
+                \includegraphics[width=.8\linewidth]{./results/timing_mac}
                 \caption{Graph for the experiment on Macbook Pro on macOS Sierra 10.12.6 on 2.5GHz Intel Core i7}
+                \label{timing_mac}
             \end{figure}
 
             \begin{figure}[H]
-                \includegraphics[width=.8\linewidth]{timing_icsmaster}
+                \includegraphics[width=.8\linewidth]{./results/timing_icsmaster}
                 \caption{Graph for the experiment on icsmaster}
+                \label{timing_icsmaster}
             \end{figure}
 
 
@@ -158,12 +162,12 @@ In this exercise you will practice in data access optimization and performance-o
             \begin{figure}[H]
                 \begin{minipage}{.5\textwidth}
                     \centering
-                    \includegraphics[width=\linewidth]{256_mac}
+                    \includegraphics[width=\linewidth]{./results/256_mac}
                     \label{c256_mac}
                 \end{minipage}%
                 \begin{minipage}{.5\textwidth}
                     \centering
-                    \includegraphics[width=\linewidth]{256_icsmaster} 
+                    \includegraphics[width=\linewidth]{./results/256_icsmaster} 
                     \label{c256_icsmaster}
                 \end{minipage}
                 \caption{Graphs centered on 256 on Macbook and icsmaster, respectively}
@@ -174,12 +178,12 @@ In this exercise you will practice in data access optimization and performance-o
             \begin{figure}[H]
                 \begin{minipage}{.5\textwidth}
                     \centering
-                    \includegraphics[width=\linewidth]{512_mac}
+                    \includegraphics[width=\linewidth]{./results/512_mac}
                 \end{minipage}%
                 \hfill
                 \begin{minipage}{.5\textwidth}
                     \centering
-                    \includegraphics[width=\linewidth]{512_icsmaster}
+                    \includegraphics[width=\linewidth]{./results/512_icsmaster}
                 \end{minipage}
                 \caption{Graphs centered on 512 on Macbook and icsmaster, respectively}
                 \label{c512}
@@ -195,12 +199,37 @@ In this exercise you will practice in data access optimization and performance-o
             The second thing one can notice in the graph is the poor performance that the blocked algorithm developed has for small matrix sizes:
 
             That is due to the chosen block size being very close to the matrix size.
+
+            \begin{figure}[H]
+                \begin{minipage}{.5\textwidth}
+                    \centering
+                    \includegraphics[width=\linewidth]{./results/0to40_mac}
+                \end{minipage}%
+                \hfill
+                \begin{minipage}{.5\textwidth}
+                    \centering
+                    \includegraphics[width=\linewidth]{./results/0to40_icsmaster}
+                \end{minipage}
+                \caption{Graphs run with matrix size from 1 to 40 on Macbook and icsmaster, respectively}
+                \label{c512}
+            \end{figure}
+
+            The huge drop at performance at the beginning of the graph happens because the matrices sizes are smaller than the block size (16).
+            My algorithm simply copies the small matrix to a 16x16 matrix padded with zeroes, making much more operations than needed.
+
+            One can also notice that the peaks in the blocked algorithm performance happens in multiples of the block size: 16 and 32.
+            Also, the worst performances are associated with the values right after these multiples: 17 and 33.
+            This can also be explained by the padding of zeroes:
+            For instance, a matrix with size 32 will be divided in four blocks of size 16, whereas a matrix with size 33 will be divided into 9 blocks, 5 of which will be mostly consisted by zeroes.
+            
+            As the matrix size gets closer to a multiple of 16, the amount os positions padded with zero decreases, consequently increasing the performance of the multiplication.
+            
             
         \item % 2.4
             There were two main differences in the performance between my machine and icsmaster.
 
             The first big difference is on the performance of "MKL blas dgemm".
-            My machine reaches a plateau of about 100 GFlops/s, when the matrix size (N) is greater or equal to 300, whereas icsmaster reaches a plateau of about 30 GFLlops/s, when $N \geq 50$.
+            My machine reaches a plateau of about 100 GFlops/s, when the matrix size (N) is greater or equal to 300, whereas icsmaster reaches a plateau of about 30 GFLlops/s, when $N \geq 50$, as can be seen on figures \ref{timing_mac} and \ref{timing_icsmaster}.
 
             This difference can be explained by analysing the difference in processors that my machine and icsmaster have.
             \sloppy Making a comparison in intel's website between my processor (Core i7-4870HQ) and icsmaster's processor (Xeon E5-2650) (the comparison can be seen in \href{https://ark.intel.com/content/www/us/en/ark/compare.html?productIds=83504,81705}{ark.intel.com/content/www/us/en/ark/compare.html?productIds=83504,81705}), one can see that my processor has better specifications, as shown in the following table:
@@ -220,7 +249,8 @@ In this exercise you will practice in data access optimization and performance-o
             Intel's Math Kernel Library makes good use of this extra power present in my machine, running way more efficiently on my machine than on icsmaster. 
 
 
-            The second big difference can be seen on the performance of the naive algorithm for $N \geq 700$. For this case my machine has a performance of 0.2 GFlops/s while icsmaster operates at about 1.1 GFlops/s. 
+            The second big difference can be seen on the performance of the naive algorithm for $N \geq 700$. 
+            When $N = 1200$, my machine has a performance of 0.2 GFlops/s while icsmaster operates at about 1.1 GFlops/s, this is visible on figures \ref{timing_mac} and \ref{timing_icsmaster}. 
 
             This is due to the difference of cache L3 sizes between icsmaster and my machine.
             While icsmaster can hold up to 20MB in L3, my machine can only hold 6.3MB (information retrived by running \textit{sysctl hw.l3cachesize} on the terminal). 
@@ -228,11 +258,13 @@ In this exercise you will practice in data access optimization and performance-o
             Three matrices of $N = 700$ occupy at least $N^2$ doubles, which can be translated to $3\times(700^2 \times 8 B) \approx 12$MB.
             This means that icsmaster can still hold these matrices on cache, but my machine has to fetch them from memory, explaining why my machine has a drop in performance for $N \geq 700$ whereas icsmaster can mantain a constant performance at about 1.1 GFlops/s.
             
-
-
         \item % 2.5
-            TODO: Expain dificulties for using Intel's MKL
 
+            Using Intel's MKL can be hard, since many functions that are commonly used in C can be replaced for more optimized functions.
+            For instance, instead of using \textit{malloc} for memory allocation, one can use \textit{mkl\_malloc} that allows one to set the alignment of the buffer.
+
+            Nevertheless, although MKL has a steep learning curve, there are tutorials available on Intel's website and the performance gained through the usage of such library is worth it, as this experiment proves it.
+    
     \end{enumerate}
 
 \end{document}

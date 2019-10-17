@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=latex 2019.9.20)  15 OCT 2019 17:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=latex 2019.9.20)  17 OCT 2019 18:58
 entering extended mode
  %&-line parsing enabled.
-**\let \APPmakepictures \empty \input  template.tex
-(/Users/usi/Documents/HPC/MiniProject2/template.tex (/usr/local/texlive/2019/te
-xmf-dist/tex/latex/koma-script/scrartcl.cls
+**\let \APPmakepictures \empty \input  MiniProject2Report.tex
+(/Users/usi/Documents/HPC/MiniProject2/MiniProject2Report.tex (/usr/local/texli
+ve/2019/texmf-dist/tex/latex/koma-script/scrartcl.cls
 Document Class: scrartcl 2019/02/01 v3.26b KOMA-Script document class (article)
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/koma-script/scrkbase.sty
@@ -996,7 +996,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 LaTeX Warning: Unused global option(s):
     [openany].
 
-No file template-autopp.aux.
+No file MiniProject2Report-autopp.aux.
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
 LaTeX Font Info:    ... okay on input line 9.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
@@ -1105,6 +1105,14 @@ LaTeX Font Info:    Try loading font information for T2A+cmss on input line 20.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/cyrillic/t2acmss.fd
 File: t2acmss.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
+
+LaTeX Warning: File `./membench/generic_mac.pdf' not found on input line 38.
+
+
+LaTeX Warning: File `./membench/generic_icsmaster.pdf' not found on input line 
+42.
+
+
 Overfull \hbox (1.39493pt too wide) in paragraph at lines 46--47
 []\T2A/cmr/m/n/10.95 The ps files were also added to this as-sign-ment folder, 
 they are called re-spec-tively generic_mac.ps
@@ -1117,37 +1125,51 @@ LaTeX Warning: Reference `code' on page 2 undefined on input line 84.
 LaTeX Warning: Reference `pseudocode' on page 2 undefined on input line 84.
 
 
-LaTeX Warning: Reference `load' on page 2 undefined on input line 97.
+LaTeX Warning: Reference `load' on page 2 undefined on input line 99.
 
 
-LaTeX Warning: Reference `write' on page 2 undefined on input line 97.
+LaTeX Warning: Reference `write' on page 2 undefined on input line 99.
 
 
-LaTeX Warning: Reference `c256' on page 3 undefined on input line 156.
+LaTeX Warning: Reference `c256' on page 3 undefined on input line 161.
 
 
-LaTeX Warning: Reference `c512' on page 3 undefined on input line 156.
+LaTeX Warning: Reference `c512' on page 3 undefined on input line 161.
+
+
+LaTeX Warning: Reference `timing_mac' on page 4 undefined on input line 233.
+
+
+LaTeX Warning: Reference `timing_icsmaster' on page 4 undefined on input line 2
+33.
+
+
+LaTeX Warning: Reference `timing_mac' on page 5 undefined on input line 254.
+
+
+LaTeX Warning: Reference `timing_icsmaster' on page 5 undefined on input line 2
+54.
 
 
 Package pst-pdf Warning: Picture container needs cropping..
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 238.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 238.
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 238.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 238.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 271.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 271.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 271.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 271.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 238.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 271.
  )
 (\end occurred when \ifx on line 161 was incomplete) 
 Here is how much of TeX's memory you used:
- 22602 strings out of 492617
- 376827 string characters out of 6129507
- 562832 words of memory out of 5000000
- 26196 multiletter control sequences out of 15000+600000
+ 22606 strings out of 492617
+ 376961 string characters out of 6129507
+ 562932 words of memory out of 5000000
+ 26198 multiletter control sequences out of 15000+600000
  20298 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 63i,8n,77p,9124b,589s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,8n,77p,9134b,589s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 No pages of output.
